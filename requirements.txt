@@ -1,0 +1,2 @@
+black==24.3.0       # Code formatter (optional)
+flake8==7.0.0       # Linter (optional)
