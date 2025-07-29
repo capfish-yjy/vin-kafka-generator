@@ -109,4 +109,4 @@ flake8==7.0.0
 
 ## 📄 License
 
-MIT License (or your company's internal license)
+MIT License
