@@ -52,11 +52,18 @@ def kafka_partition(key: str, num_partitions: int) -> int:
 
 if __name__ == "__main__":
     if len(sys.argv) < 2:
-        print("Usage: python kafka_partition_finder.py key1 key2 key3 ...")
+        print("Usage: python kafka_partition_finder.py [num_partitions] key1 key2 key3 ...")
         sys.exit(1)
 
-    keys = sys.argv[1:]
-    num_partitions = 16
+    try:
+        num_partitions = int(sys.argv[1])
+        keys = sys.argv[2:]
+        if not keys:
+            print("Please provide at least one key.")
+            sys.exit(1)
+    except ValueError:
+        num_partitions = 16
+        keys = sys.argv[1:]
 
     for key in keys:
         partition = kafka_partition(key, num_partitions)

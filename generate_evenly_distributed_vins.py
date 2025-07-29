@@ -2,6 +2,7 @@ import random
 import string
 import json
 import csv
+import argparse
 from kafka_partition_finder import kafka_partition
 
 NUM_PARTITIONS = 16
@@ -56,9 +57,16 @@ def export_vins(vins, format, filename):
         raise ValueError("Unsupported export format")
 
 if __name__ == "__main__":
-    vin_map = generate_vins_evenly_distributed(NUM_PARTITIONS, VINS_PER_PARTITION)
+    parser = argparse.ArgumentParser(description="Generate evenly distributed VINs.")
+    parser.add_argument("--partitions", type=int, default=NUM_PARTITIONS)
+    parser.add_argument("--vins-per-partition", type=int, default=VINS_PER_PARTITION)
+    parser.add_argument("--format", choices=["txt", "csv", "json"], default=EXPORT_FORMAT)
+    parser.add_argument("--filename", default=EXPORT_FILENAME)
+    args = parser.parse_args()
+
+    vin_map = generate_vins_evenly_distributed(args.partitions, args.vins_per_partition)
     all_vins = flatten_vins(vin_map)
 
-    print(f"Generated {len(all_vins)} VINs starting with '{VIN_PREFIX}' across {NUM_PARTITIONS} partitions.")
-    export_vins(all_vins, EXPORT_FORMAT, EXPORT_FILENAME)
-    print(f"Saved to: {EXPORT_FILENAME}")
+    print(f"Generated {len(all_vins)} VINs starting with '{VIN_PREFIX}' across {args.partitions} partitions.")
+    export_vins(all_vins, args.format, args.filename)
+    print(f"Saved to: {args.filename}")
