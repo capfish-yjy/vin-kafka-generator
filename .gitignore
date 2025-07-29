@@ -1,0 +1,40 @@
+# === Python ===
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.log
+*.tmp
+
+# Virtual environments
+.env/
+.venv/
+env/
+venv/
+ENV*/
+*.env
+
+# Jupyter Notebook checkpoints
+.ipynb_checkpoints/
+
+# === VS Code ===
+.vscode/
+
+# === Output files from VIN generator ===
+vin_keys.txt
+vin_keys.csv
+vin_keys.json
+
+# === OS-specific ===
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# === Test or coverage reports (optional) ===
+coverage.*
+*.cover
+*.py,cover
+.hypothesis/
+.pytest_cache/
+nosetests.xml
+test-results/
