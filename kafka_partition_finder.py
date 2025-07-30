@@ -1,5 +1,4 @@
 # kafka_partition_finder.py
-import sys
 import argparse
 
 def kafka_murmur2(data: bytes) -> int:
