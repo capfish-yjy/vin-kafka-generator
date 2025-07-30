@@ -36,10 +36,11 @@ Generates VINs that are evenly distributed across all Kafka partitions. The VINs
 - Start with `TEST`
 - Are saved to `.txt`, `.csv`, or `.json`
 
-#### 🔧 Configurable parameters:
-- `NUM_PARTITIONS`: Number of Kafka partitions
-- `VINS_PER_PARTITION`: Number of VINs per partition
-- `EXPORT_FORMAT`: One of `txt`, `csv`, or `json`
+#### 🔧 Argument parameters:
+- `--partitions`: Number of Kafka partitions
+- `--vins-per-partition`: Number of VINs per partition
+- `--format`: One of `txt`, `csv`, or `json`
+- `--filename`: Output file name
 
 #### 🏃 Usage:
 ```bash
@@ -55,7 +56,32 @@ TESTDJ6F21YUMVKPR : Partition 1
 
 ---
 
-### 3. `verify_vin_partitions.py`
+### 3. `generate_skewed_vins.py`
+
+Generates VINs with given number distributed across all Kafka partitions. The VINs:
+- Are 17 characters long
+- Start with `TEST`
+- Are saved to `.txt`, `.csv`, or `.json`
+
+#### 🔧 Argument parameters:
+- `--format`: One of `txt`, `csv`, or `json`
+- `--filename`: Output file name
+
+#### 🏃 Usage:
+```bash
+python generate_skewed_vins.py
+```
+
+#### 💾 Example Output (`vin_keys_skewed.txt`):
+```
+TEST7K8F1X9GZLW4V5 : Partition 0
+TESTDJ6F21YUMVKPR : Partition 1
+...
+```
+
+---
+
+### 4. `verify_vin_partitions.py`
 
 Verifies that each VIN in the generated output maps to the correct Kafka partition using `kafka_partition_finder`.
 

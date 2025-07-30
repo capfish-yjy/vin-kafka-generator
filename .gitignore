@@ -21,9 +21,9 @@ ENV*/
 .vscode/
 
 # === Output files from VIN generator ===
-vin_keys.txt
-vin_keys.csv
-vin_keys.json
+vin_keys*.txt
+vin_keys*.csv
+vin_keys*.json
 
 # === OS-specific ===
 .DS_Store
