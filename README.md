@@ -10,14 +10,19 @@ This repository contains three Python scripts designed to help generate and veri
 
 Calculates which Kafka partition a given key will be assigned to, using Kafka’s default Murmur2 hash strategy.
 
-#### 🔧 Usage (CLI):
+#### 🔧 Argument parameters:
+- `--partitions`: Number of Kafka partitions
+- `--vins`: List of VIN keys
+
+#### 🏃 Usage:
 ```bash
-python kafka_partition_finder.py TESTVIN12345678901
+python kafka_partition_finder.py --partitions 8 --vins TESTVIN12345678901 TESTVIN98765432109
 ```
 
 #### 🖨 Output:
 ```
 TESTVIN12345678901: Partition 3
+TESTVIN98765432109: Partition 7
 ```
 
 This script also provides a reusable function:

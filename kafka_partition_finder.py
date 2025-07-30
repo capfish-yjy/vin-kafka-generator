@@ -1,5 +1,6 @@
 # kafka_partition_finder.py
 import sys
+import argparse
 
 def kafka_murmur2(data: bytes) -> int:
     length = len(data)
@@ -51,20 +52,11 @@ def kafka_partition(key: str, num_partitions: int) -> int:
     return partition
 
 if __name__ == "__main__":
-    if len(sys.argv) < 2:
-        print("Usage: python kafka_partition_finder.py [num_partitions] key1 key2 key3 ...")
-        sys.exit(1)
+    parser = argparse.ArgumentParser(description="Find Kafka partition for VIN keys.")
+    parser.add_argument("--partitions", type=int, default=16, help="Number of partitions")
+    parser.add_argument("--vins", nargs="+", required=True, help="List of VIN keys")
+    args = parser.parse_args()
 
-    try:
-        num_partitions = int(sys.argv[1])
-        keys = sys.argv[2:]
-        if not keys:
-            print("Please provide at least one key.")
-            sys.exit(1)
-    except ValueError:
-        num_partitions = 16
-        keys = sys.argv[1:]
-
-    for key in keys:
-        partition = kafka_partition(key, num_partitions)
+    for key in args.vins:
+        partition = kafka_partition(key, args.partitions)
         print(f"{key}: Partition {partition}")
